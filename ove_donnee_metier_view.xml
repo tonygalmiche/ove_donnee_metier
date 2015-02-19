@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        	
+    <!--<menuitem id="menu_is_ove_donnee_metier"  sequence="7"  name="Données Métier" parent="is_ove.menu_is_ove" groups="group_is_ove_modif_donnees,group_is_ove_consult_donnees" /> -->
+    <menuitem id="menu_is_ove_donnee_metier"  sequence="7"  name="Données Métier" parent="is_ove.menu_is_ove"  />
+    	
+		<!-- Document -->
+		<record id="view_is_ove_donnee_metier_tree" model="ir.ui.view">
+            <field name="name">is.ove.donnee.metier.tree</field>
+            <field name="model">ove.donnee.metier</field>
+            <field name="arch" type="xml">
+                <tree string="Données Métier">
+                    <field name="date" />
+                    <field name="usager_id"/>
+                    <field name="title"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_is_ove_donnee_metier_filter" model="ir.ui.view">
+            <field name="name">is.ove.donnee.metier.select</field>
+            <field name="model">ove.donnee.metier</field>
+            <field name="arch" type="xml">
+                <search string="Recherche documents">
+                   <field name="date" />
+				   <field name="usager_id" />
+				   <field name="title" />
+               </search>
+            </field>
+        </record>
+        
+        <record id="view_ove_donnee_metier_form" model="ir.ui.view">
+            <field name="name">ove.ove.donnee.metier.form</field>
+            <field name="model">ove.donnee.metier</field>
+            <field name="arch" type="xml">
+                <form string="Données Métier">
+                  <sheet>
+                	<group name="usager_infos">
+                		<field name="usager_id" />
+                	</group>
+                	<notebook colspan="4">
+                		<page string="Champs de saisie">
+                		  <group name="information">
+                			<field name="date" />
+                		  </group>
+                		  <separator string="Rédacteurs" />
+                		  <field name="user_ids" >
+                		  	<tree>
+                		  		<field name="name" />
+                		  	</tree>
+                		  </field>
+                		  <group name="corps" string="Corps">
+                		  	<field name="title" />
+                		  	<field name="body" />
+                		  </group>	
+                		</page>
+                		<page string="Commentaires" >
+                			<separator string="Professionnels ayant participé à la rédaction" />
+                			<field name="comment_ids" >
+                				<tree string="Professionnels ayant participé à la rédaction" editable="bottom">
+                					<field name="user_id"/>
+                					<field name="comment"/>
+                					<field name="doc_id" invisible="1"/>
+                				</tree>
+                			</field>
+                			<separator string="Commentaire général" />
+                			<field name="general_comment" placeholder="Commentaire général ..." />
+                		</page>
+                		<page string="Documents associés">
+                			<group name="attachments" String="Liste des documents" >
+                				<field name="attachment_ids" widget="many2many_binary" />              				          		
+                			</group>
+                		</page>
+                		<page string="Accessibilités" >
+                			<group name="consultation" string="Consultation" >
+                				<field name="consult_group_id" />
+                				<field name="consult_users" >
+                		  			<tree>
+                		  				<field name="name" />
+                		  			</tree>
+                		  		</field>
+                			</group>
+                			<group name="modification" string="Modification" >
+                				<field name="modif_group_id" />
+                				<field name="modif_users" >
+                		  			<tree>
+                		  				<field name="name" />
+                		  			</tree>
+                		 		 </field>
+                			</group>
+                		</page>
+                	</notebook>
+                </sheet>                   	
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_ove_donnee_metier" model="ir.actions.act_window">
+            <field name="name">Données Métier</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ove.donnee.metier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_is_ove_donnee_metier_filter"/>
+        </record>
+
+		<menuitem action="action_ove_donnee_metier" 
+				id="menu_action_ove_donnee_metier"  sequence="1"  
+				name="Données Métier" 
+				parent="menu_is_ove_donnee_metier" />
+
+
+<!--				groups="group_is_ove_modif_donnees,group_is_ove_consult_donnees"/> -->
+				
+
+    </data>
+</openerp>

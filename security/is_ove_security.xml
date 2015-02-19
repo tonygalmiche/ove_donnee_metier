@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+
+        <record model="res.groups" id="group_is_ove_consult_donnees">
+            <field name="name">Donnée métier Consultation</field>
+            <!--<field name="menu_access" eval="[(4,ref('is_ove.menu_is_ove'))]"/>-->
+        </record>
+
+        <record model="res.groups" id="group_is_ove_modif_donnees">
+            <field name="name">Donnée métier Modification</field>
+            <field name="implied_ids" eval="[(4,ref('group_is_ove_consult_donnees'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <!--<field name="menu_access" eval="[(4,ref('is_ove.menu_is_ove'))]"/>-->
+        </record>
+        
+
+    </data>
+</openerp>
